@@ -1,7 +1,9 @@
 
 Ejemplo: Listar los múltiplos de 13
-Diseñar un algoritmo que liste los múltiplos del número 13 que sean más pequeños que el número introducido por teclado
+Diseñar un algoritmo que liste los múltiplos del número 13 que sean más pequeños que el número introducido por teclado.
+Seguir pidiendo números hasta introducir un -1
 
+Ejemplo 200:
 *** Ejecución Iniciada. ***
 13 26 39 52 65 78 91 104 117 130 143 156 169 182 195
 *** Ejecución Finalizada. ***
@@ -9,7 +11,7 @@ Diseñar un algoritmo que liste los múltiplos del número 13 que sean más pequ
 
 
 Ejemplo: Listar los múltiplos de 3 y 7 entre 10 y 1000
-Diseña un algoritmo que liste los números entre 10 y 1000 que sean, a la vez, múltiplos de 7 y de 3. 
+Diseña un algoritmo que liste los números entre 10 y 1000 que sean, a la vez, múltiplos de 7 y de 3.
 
 *** Ejecución Iniciada. ***
 21 42 63 84 105 126 147 168 189 210 231 252 273 294 315 33
