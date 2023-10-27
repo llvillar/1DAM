@@ -1,0 +1,42 @@
+
+Ejercicios con condicionales
+
+Condicional1: Realiza un programa que pida un número por teclado y nos indique si es par o impar.
+
+Condicional2: Escribe un programa que reciba un año y nos diga si es bisiesto o no.
+
+Condicional3: Crea un programa que pida al usuario dos números y muestre el resultado de su división.
+    Si el segundo número es 0, debe mostrar un mensaje de error.
+
+Condicional4: Realiza un programa que calcule la potencia de un número, dado este y su exponente. Pueden ocurrir tres casos:
+* El exponente sea positivo: imprime resultado en pantalla.
+* El exponente sea 0, el resultado es 1.
+* El exponente sea negativo, el resultado es 1/potencia con el exponente positivo.
+
+Condicional5: El director de una escuela está organizando un viaje de estudios y requiere determinar cuánto debe cobrar a
+cada alumno y cuánto debe pagar a la compañía de viajes por el servicio. La forma de cobrar es la siguiente:
+* Si son 100 alumnos o más, el costo por cada alumno es de 65 euros.
+* De 50 a 99 alumnos, el costo es de 70 euros.
+* De 30 a 49 alumnos, el costo es de 95 euros.
+* Menos de 30 alumnos, el costo de la renta del autobús es de 4000 euros, sin importar el número de alumnos.
+Realiza un algoritmo que permita determinar el pago a la compañía de autobuses y lo que debe pagar cada alumno por el viaje
+
+Condicional6: La política de cobro de una compañía telefónica es:
+Cuando se realiza una llamada, el cobro es por el tiempo que esta dura, de tal forma que los primeros cinco
+minutos cuestan 1 euro, los siguientes tres, 80 céntimos, los siguientes dos minutos a 70 céntimos y a partir del
+décimo minuto, 50 céntimos.
+Además, se carga un impuesto de 3% cuando es domingo, y si es otro día, en turno de mañana 15% y en turno de tarde 10%.
+Realiza un algoritmo para determinar cuánto debe pagar por cada concepto una persona que realiza una llamada.
+
+Condicional7:
+Una compañía de transporte internacional tiene servicio en algunos países de América del Norte, América Central, América del Sur, Europa y Asia. El costo por servicio de transporte se basa en el peso del paquete y la zona a la que va dirigida. Lo anterior se muestra en la siguiente tabla:
+
+ZONA UBICACIÓN	COSTO/KILOGRAMO
+1 América del Norte	24,00 euros
+2 América Central	20, 00 euros
+3 América del Sur	21,00 euros
+4 Europa	10,00 euros
+5 Asia	18,00 euros
+Parte de su política implica que los paquetes con un peso superior a 5kg no son transportados, por cuestiones de
+logística y seguridad.
+Realiza un algoritmo para determinar el cobro por la entrega de un paquete o, en su caso, el rechazo de la entrega.
