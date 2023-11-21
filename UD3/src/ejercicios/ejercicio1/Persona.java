@@ -78,7 +78,7 @@ public class Persona {
     }
 
     public void generarDNI(){
-        if(this.getDNI() != null && this.getDNI().length() > 0){
+        if(this.getDNI() == null || this.getDNI().length() == 0){
             Random random = new Random();
             int numero = random.nextInt(90000000) + 10000000;
             char letra = getLetra(numero);
@@ -86,12 +86,6 @@ public class Persona {
             //this.DNI = String.valueOf(numero) + letra;
             this.setDNI(String.valueOf(numero) + letra);
         }
-
-
-        String a;
-        String b = new String();
-        
-        String c ="asdasdasd";
     }
 
     private char getLetra(int numero) {
