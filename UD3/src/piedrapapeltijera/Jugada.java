@@ -1,7 +1,7 @@
 package piedrapapeltijera;
 
 public enum Jugada {
-    PIEDRA, PAPEL, TIJERA
+    PIEDRA, PAPEL, TIJERA;
 
     boolean ganaA(Jugada otra){
         switch (this){
