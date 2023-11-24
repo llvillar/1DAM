@@ -19,4 +19,8 @@ public enum Jugada {
         return false;
     }
 
+    boolean empataCon(Jugada otra){
+        return this == otra;
+    }
+
 }
