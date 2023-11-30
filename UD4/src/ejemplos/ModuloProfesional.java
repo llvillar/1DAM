@@ -1,5 +1,7 @@
 package ejemplos;
 
+import java.util.Objects;
+
 public class ModuloProfesional {
     private int codigo;
     private  String descripcion;
@@ -23,5 +25,18 @@ public class ModuloProfesional {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ModuloProfesional that = (ModuloProfesional) o;
+        return this.codigo == that.codigo;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigo);
     }
 }
