@@ -18,6 +18,8 @@ public class Autor {
 
     @Override
     public String toString() {
+
+        System.out.println("hola");
         return "Autor{" +
                 "nombre='" + nombre + '\'' +
                 '}';
