@@ -11,8 +11,16 @@ public class FigurasMain {
 
     private static List<FiguraGeometrica> figuras;
     public static void main(String[] args) {
+        FiguraGeometrica f = new FiguraGeometrica("");
+
+            f.setNombre("");
+
+        f.getNombre();
+
+
         figuras = new ArrayList<>();
         menu();
+
     }
 
     private static void menu() {
