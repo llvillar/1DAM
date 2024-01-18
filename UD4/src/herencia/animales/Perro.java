@@ -2,6 +2,7 @@ package herencia.animales;
 
 import java.util.Objects;
 
+//public final class Perro extends Animal{
 public class Perro extends Animal{
 
     private String raza;

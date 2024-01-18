@@ -19,7 +19,7 @@ public class Gato extends Animal{
 
 
     @Override
-    public void emitirSonido() {
+    public final void emitirSonido() {
         System.out.println(getNombre() + " ha maullado.");
     }
 
