@@ -51,21 +51,36 @@ public class Pelicula extends ObraAudiovisual{
     @Override
     public String toString() {
         return "Pelicula{" +
-                "titulo=" + getTitulo() +
-                "titulo=" + calcularDuracion(getDuracion()) +
-                "anioEstreno=" + anioEstreno +
-                ", director=" + director.getNombre() + " "+ director.getApellidos() +
-                ", actoresPrincipales=" + actoresPrincipales +
-                ", generos=" + generos +
-                '}';
+                "\ntitulo=" + getTitulo() +
+                "\nduracion=" + calcularDuracion(getDuracion()) +
+                "\nanioEstreno=" + anioEstreno +
+                "\ndirector=" + (director == null ? "desconocido" : (director.getNombre() + " "+ director.getApellidos())) +
+                "\nactoresPrincipales=" + actoresPrincipalesToString(actoresPrincipales) +
+                "\ngeneros=" + generosToString(generos) +
+                "\n}";
+    }
+
+    private String generosToString(List<GeneroPelicula> generos) {
+        String resultado = "", separador = "";
+        for (GeneroPelicula g : generos){
+            resultado += separador + g.getNombre();
+            separador = ", ";
+        }
+        return resultado;
+    }
+
+    private String actoresPrincipalesToString(List<Persona> actoresPrincipales) {
+        String resultado = "", separador = "";
+        for (Persona p : actoresPrincipales){
+            resultado += separador + p.getNombre() + " " + p.getApellidos();
+            separador = ", ";
+        }
+        return resultado;
     }
 
     private String calcularDuracion(int duracion) {
         int horas = duracion / 3600;
         int minutos = (duracion % 3600) / 60;
-
         return horas + ":" + minutos;
     }
-
-
 }
