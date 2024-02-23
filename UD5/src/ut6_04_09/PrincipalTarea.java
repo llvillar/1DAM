@@ -11,6 +11,7 @@ public class PrincipalTarea {
     private final static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+
         final Map<String, List<Estudiante>> listadoGrupos = new TreeMap<>();
 
         boolean salir = false;

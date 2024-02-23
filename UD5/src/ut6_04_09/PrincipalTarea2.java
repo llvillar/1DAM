@@ -2,6 +2,7 @@ package ut6_04_09;
 
 import java.util.*;
 
+
 public class PrincipalTarea2 {
     private final static Scanner sc = new Scanner(System.in);
 
@@ -30,49 +31,8 @@ public class PrincipalTarea2 {
             }
         }
 
-        sc.close();
-    }
-
-    public static int dibujarMenuGrupos() {
-        System.out.println();
-        System.out.println("Elige una opción:");
-        System.out.println("1. Crear un grupo de estudiantes");
-        System.out.println("2. Listar grupos de estudiantes");
-        System.out.println("3. Eliminar un grupo de estudiantes");
-        System.out.println("4. Seleccionar un grupo de estudiantes");
-        System.out.println("0. Salir");
-
-        int opcion = sc.nextInt();
-        sc.nextLine();
-
-        return opcion;
-    }
-
-    private static void crearGrupo(Map<String, List<Estudiante>> listadoGrupos) {
-        String grupo = leerGrupo();
-        if (listadoGrupos.containsKey(grupo)) {
-            System.out.println("El grupo ya existe");
-        } else {
-            listadoGrupos.put(grupo, new ArrayList<>());
-            System.out.println("Grupo creado con éxito");
+            sc.close();
         }
-    }
-
-    public static void listarGrupos(Map<String, List<Estudiante>> listado) {
-        for (String grupo : listado.keySet()) {
-            System.out.println("> " + grupo);
-        }
-    }
-
-    private static void eliminarGrupo(Map<String, List<Estudiante>> listadoGrupos) {
-        String grupo = leerGrupo();
-        if (!listadoGrupos.containsKey(grupo)) {
-            System.out.println("El grupo no existe");
-        } else {
-            listadoGrupos.remove(grupo);
-            System.out.println("Grupo eliminado con éxito");
-        }
-    }
 
     private static void seleccionarGrupo(Map<String, List<Estudiante>> listadoGrupos) {
         String grupo = leerGrupo();
@@ -85,12 +45,8 @@ public class PrincipalTarea2 {
         }
     }
 
-    public static String leerGrupo() {
-        System.out.print("Grupo: ");
-        return sc.nextLine();
-    }
-
     private static void mainEstudiantes(List<Estudiante> listadoEstudiantes) {
+
         boolean salir = false;
         while (!salir) {
             switch (dibujarMenuEstudiantes()) {
@@ -116,6 +72,47 @@ public class PrincipalTarea2 {
                     salir = true;
             }
         }
+
+    }
+
+    private static void eliminarEstudiantes(List<Estudiante> listadoEstudiantes) {
+        listadoEstudiantes.clear();
+        System.out.println("Estudiantes del grupo eliminados");
+    }
+
+    private static void eliminarEstudiante(List<Estudiante> listadoEstudiantes) {
+        int pos = leerPosicion(listadoEstudiantes.size());
+        Estudiante e = listadoEstudiantes.remove(pos);
+        System.out.println("Estudiante eliminado: " + e);
+    }
+
+    private static void ordenarEstudiantesPorNIE(List<Estudiante> listadoEstudiantes) {
+
+        listadoEstudiantes.sort(new Comparator<Estudiante>() {
+            @Override
+            public int compare(Estudiante o1, Estudiante o2) {
+                return o1.getNie() - o2.getNie();
+            }
+        });
+    }
+
+    private static void insertarEstudiante(List<Estudiante> listadoEstudiantes) {
+        int pos = leerPosicion(listadoEstudiantes.size() + 1);
+        Estudiante e = leerEstudiante();
+        listadoEstudiantes.add(pos, e);
+        System.out.println("Estudiante insertado");
+    }
+
+    private static void anyadirEstudiante(List<Estudiante> listadoEstudiantes) {
+        Estudiante e = leerEstudiante();
+        listadoEstudiantes.add(e);
+        System.out.println("Estudiante añadido");
+    }
+
+    private static void listarEstudiantes(List<Estudiante> listadoEstudiantes) {
+        for (int i = 0; i < listadoEstudiantes.size(); i++) {
+            System.out.printf("%02d: %s\n", i + 1, listadoEstudiantes.get(i));
+        }
     }
 
     private static int dibujarMenuEstudiantes() {
@@ -135,43 +132,50 @@ public class PrincipalTarea2 {
         return opcion;
     }
 
-    private static void listarEstudiantes(List<Estudiante> listadoEstudiantes) {
-        for (int i = 0; i < listadoEstudiantes.size(); i++) {
-            System.out.printf("%02d: %s\n", i + 1, listadoEstudiantes.get(i));
+    private static void eliminarGrupo(Map<String, List<Estudiante>> listadoGrupos) {
+        String grupo = leerGrupo();
+        if (!listadoGrupos.containsKey(grupo)) {
+            System.out.println("El grupo no existe");
+        } else {
+            listadoGrupos.remove(grupo);
+            System.out.println("Grupo eliminado con éxito");
         }
     }
 
-    private static void anyadirEstudiante(List<Estudiante> listadoEstudiantes) {
-        Estudiante e = leerEstudiante();
-        listadoEstudiantes.add(e);
-        System.out.println("Estudiante añadido");
+    private static void listarGrupos(Map<String, List<Estudiante>> listadoGrupos) {
+        for (String grupo : listadoGrupos.keySet()) {
+            System.out.println("> " + grupo);
+        }
     }
 
-    private static void insertarEstudiante(List<Estudiante> listadoEstudiantes) {
-        int pos = leerPosicion(listadoEstudiantes.size() + 1);
-        Estudiante e = leerEstudiante();
-        listadoEstudiantes.add(pos, e);
-        System.out.println("Estudiante insertado");
+    private static void crearGrupo(Map<String, List<Estudiante>> listadoGrupos) {
+        String grupo = leerGrupo();
+        if (listadoGrupos.containsKey(grupo)) {
+            System.out.println("El grupo ya existe");
+        } else {
+            listadoGrupos.put(grupo, new ArrayList<>());
+            System.out.println("Grupo creado con éxito");
+        }
     }
 
-    private static void ordenarEstudiantesPorNIE(List<Estudiante> listadoEstudiantes) {
-        listadoEstudiantes.sort(new Comparator<Estudiante>() {
-            @Override
-            public int compare(Estudiante o1, Estudiante o2) {
-                return o1.getNie() - o2.getNie();
-            }
-        });
+    private static int dibujarMenuGrupos() {
+        System.out.println();
+        System.out.println("Elige una opción:");
+        System.out.println("1. Crear un grupo de estudiantes");
+        System.out.println("2. Listar grupos de estudiantes");
+        System.out.println("3. Eliminar un grupo de estudiantes");
+        System.out.println("4. Seleccionar un grupo de estudiantes");
+        System.out.println("0. Salir");
+
+        int opcion = sc.nextInt();
+        sc.nextLine();
+
+        return opcion;
     }
 
-    private static void eliminarEstudiante(List<Estudiante> listadoEstudiantes) {
-        int pos = leerPosicion(listadoEstudiantes.size());
-        Estudiante e = listadoEstudiantes.remove(pos);
-        System.out.println("Estudiante eliminado: " + e);
-    }
-
-    private static void eliminarEstudiantes(List<Estudiante> listadoEstudiantes) {
-        listadoEstudiantes.clear();
-        System.out.println("Estudiantes del grupo eliminados");
+    public static String leerGrupo() {
+        System.out.print("Grupo: ");
+        return sc.nextLine();
     }
 
     public static Estudiante leerEstudiante() {
@@ -204,4 +208,5 @@ public class PrincipalTarea2 {
         // devolver como un índice de [0,size()-1]
         return num - 1;
     }
+
 }

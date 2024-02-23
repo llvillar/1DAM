@@ -13,7 +13,6 @@ public class Ut6_01_01 {
 
             // b) mostrar en orden inverso
             for (int i = linea.length() - 1; i >= 0; i--) {
-
                 System.out.print(linea.charAt(i));
             }
             System.out.println();
@@ -35,8 +34,7 @@ public class Ut6_01_01 {
             System.out.println(reemplazo);
 
             // e) contar vocales
-            int numA = 0, numE = 0, numI = 0, numO = 0,
-                    numU = 0;
+            int numA = 0, numE = 0, numI = 0, numO = 0, numU = 0;
             for (int i = 0; i < linea.length(); i++) {
                 switch (linea.charAt(i)) {
                     case 'A':
