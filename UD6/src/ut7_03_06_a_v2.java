@@ -1,0 +1,43 @@
+import notasestudiante.EstudianteV2;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.*;
+
+public class ut7_03_06_a_v2 {
+    public static void main(String[] args) throws IOException {
+
+
+        try (Scanner sc = new Scanner(System.in)) {
+            LinkedList<EstudianteV2> grupo = new LinkedList<EstudianteV2>();
+            while (true) {
+                System.out.print("Introduce el nombre del estudiante: ");
+                String nombre;
+                do {
+                    nombre = sc.nextLine();
+                } while (nombre.isEmpty());
+                if (nombre.equalsIgnoreCase("FIN")) break;
+
+                EstudianteV2 e = new EstudianteV2(nombre);
+
+                List<Float> calificaciones = new ArrayList<>();
+                System.out.println("Introduce las calificaciones, -1 para terminar:");
+                while (true) {
+                    float calificacion = sc.nextFloat();
+                    if (calificacion == -1) break;
+                    calificaciones.add(calificacion);
+                }
+                e.setNotas(calificaciones);
+
+                grupo.add(e);
+            }
+// Guardar datos
+            try (ObjectOutputStream oos = new ObjectOutputStream(
+                    new FileOutputStream("notas5.dat"))
+            ) {
+                oos.writeObject(grupo);
+            }
+        }
+    }
+}
