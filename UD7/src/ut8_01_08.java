@@ -1,5 +1,11 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
 public class ut8_01_08 {
 
@@ -10,17 +16,16 @@ public class ut8_01_08 {
 
         ventana.setSize(500, 500);
         ventana.setTitle("Calculadora");
-        //GridLayout layout1 = new GridLayout(3, 1);
 
-        ventana.setLayout(new GridBagLayout());
+        ventana.setLayout(new BorderLayout());
+
         JTextField resultado = new JTextField();
         resultado.setText("0");
-        resultado.setMaximumSize(new Dimension(500,20));
-        ventana.add(resultado);
+        ventana.add(resultado, BorderLayout.PAGE_START);
 
-        new GridLayout(4, 4);
 
-        JPanel teclado = new JPanel();
+
+        JPanel teclado = new JPanel( new GridLayout(4, 4));
         teclado.add((new JButton("1")));
         teclado.add(new JButton("2"));
         teclado.add(new JButton("3"));
@@ -41,9 +46,9 @@ public class ut8_01_08 {
         teclado.add(new JButton("="));
         teclado.add(new JButton("/"));
 
-        ventana.add(teclado);
+        ventana.add(teclado, BorderLayout.CENTER);
 
-        ventana.add(new JLabel("I.E.S. Oretania"), BorderLayout.CENTER);
+        ventana.add(new JLabel("I.E.S. Oretania", JLabel.CENTER), BorderLayout.PAGE_END);
 
         ventana.setVisible(true);
     }
