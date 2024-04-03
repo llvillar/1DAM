@@ -27,42 +27,7 @@ public class ut8_01_11 {
     }
 }
 
-class ResultadoActionListener implements ActionListener {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JButton source = (JButton) e.getSource();
-        source.setText("0");
-    }
-}
 
-class MenosUnoActionListener implements ActionListener {
 
-    private JButton resultado;
-    public MenosUnoActionListener(JButton resultado) {
-        this.resultado = resultado;
-    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String total = resultado.getText();
-        int i = Integer.parseInt(total);
-        total = String.valueOf(i - 1);
-        resultado.setText(total);
-    }
-}
 
-class MasUnoActionListener implements ActionListener {
-
-    private JButton resultado;
-    public MasUnoActionListener(JButton resultado) {
-        this.resultado = resultado;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String total = resultado.getText();
-        int i = Integer.parseInt(total);
-        total = String.valueOf(i + 1);
-        resultado.setText(total);
-    }
-}
