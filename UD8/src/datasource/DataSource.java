@@ -1,6 +1,4 @@
-package db;
-
-import datasource.DataSourceException;
+package datasource;
 
 import java.io.FileInputStream;
 import java.io.IOException;
