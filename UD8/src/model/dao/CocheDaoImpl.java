@@ -1,6 +1,7 @@
 package model.dao;
 
 import datasource.DataSource;
+import datasource.DataSourceException;
 import model.entities.Coche;
 
 import java.sql.Connection;
@@ -27,7 +28,7 @@ public class CocheDaoImpl implements CocheDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            String sql = "select * from coche";
+            String sql = "select * from coche order by matricula";
             ps = connection.prepareStatement(sql);
 
             rs = ps.executeQuery();
@@ -87,21 +88,115 @@ public class CocheDaoImpl implements CocheDao {
 
     @Override
     public Coche findById(String matricula) {
-        return null;
+
+        Coche coche = null;
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select * from coche where matricula = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, matricula);
+
+            rs = ps.executeQuery();
+
+
+            if(rs.next()){
+                coche = new Coche();
+                coche.setMatricula(rs.getString("matricula"));
+                coche.setMarca(rs.getString("marca"));
+                coche.setModelo(rs.getString("modelo"));
+                coche.setAnio(rs.getDate("anio"));
+                coche.setPrecio(rs.getDouble("precio"));
+                coche.setVendido(rs.getBoolean("vendido"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            DataSource.closeStatement(ps);
+            DataSource.closeResultSet(rs);
+        }
+        return coche;
     }
 
     @Override
     public Coche save(Coche coche) {
-        return null;
+
+        PreparedStatement ps = null;
+
+        try {
+            String sql = "insert into coche (matricula, marca, modelo, anio, precio, vendido) values (?, ?, ?, ?, ?, ?)";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, coche.getMatricula());
+            ps.setString(2, coche.getMarca());
+            ps.setString(3, coche.getModelo());
+            ps.setInt(4, coche.getAnio().getYear()+1900);
+            ps.setDouble(5, coche.getPrecio());
+            ps.setBoolean(6, coche.isVendido());
+
+            int fila = ps.executeUpdate();
+
+            /***
+             /// codigo para recuperrar secuencia de base de datos
+            if(fila > 0){
+                ResultSet keys = ps.getGeneratedKeys();
+                if(keys.next()){
+                    int id = keys.getInt(1);
+                    coche.setId(id);
+                }else{
+                    throw new DataSourceException("No se ha insertado registro");
+                }
+            }
+             **/
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            DataSource.closeStatement(ps);
+        }
+        return coche;
     }
 
     @Override
     public void update(Coche coche) {
 
+        PreparedStatement ps = null;
+
+        try {
+            String sql = "update coche set marca = ? , modelo = ?, anio = ?, precio = ?, vendido = ? where matricula = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, coche.getMarca());
+            ps.setString(2, coche.getModelo());
+            ps.setInt(3, coche.getAnio().getYear()+1900);
+            ps.setDouble(4, coche.getPrecio());
+            ps.setBoolean(5, coche.isVendido());
+            ps.setString(6, coche.getMatricula());
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            DataSource.closeStatement(ps);
+        }
     }
 
     @Override
     public void delete(Coche coche) {
+        PreparedStatement ps = null;
 
+        try {
+            String sql = "delete from coche where matricula = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, coche.getMatricula());
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            DataSource.closeStatement(ps);
+        }
     }
 }
