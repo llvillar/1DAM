@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CocheDaoImpl implements CocheDao {
+public class CocheDaoImpl extends BaseDao implements CocheDao {
 
     private Connection connection;
 
@@ -137,7 +137,7 @@ public class CocheDaoImpl implements CocheDao {
 
             int fila = ps.executeUpdate();
 
-            /***
+            /*
              /// codigo para recuperrar secuencia de base de datos
             if(fila > 0){
                 ResultSet keys = ps.getGeneratedKeys();
@@ -147,8 +147,8 @@ public class CocheDaoImpl implements CocheDao {
                 }else{
                     throw new DataSourceException("No se ha insertado registro");
                 }
-            }
-             **/
+            }*/
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -1,4 +1,4 @@
-package datasource;
+package model.dao;
 
 import model.dao.CocheDao;
 import model.dao.CocheDaoImpl;

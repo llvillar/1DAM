@@ -10,7 +10,7 @@ public class CocheServiceImpl implements CocheService{
 
     private CocheDao dao;
     public CocheServiceImpl() {
-        dao = DAOFactory.createCocheDao();
+        this.dao = DAOFactory.createCocheDao();
     }
 
     @Override

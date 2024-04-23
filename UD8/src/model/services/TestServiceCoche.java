@@ -35,7 +35,7 @@ public class TestServiceCoche {
         coche.setAnio(new Date());
         coche.setPrecio(15000);
         coche.setVendido(false);
-        //dao.save(coche);
+        service.save(coche);
         System.out.println(coche);
 
         System.out.println("*******************************Update******************************");
