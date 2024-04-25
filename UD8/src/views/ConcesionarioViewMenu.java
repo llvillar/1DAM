@@ -8,6 +8,8 @@ import model.services.CocheService;
 import model.services.CocheServiceImpl;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,10 +17,22 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ConcesionarioViewMenu extends JFrame {
-    private JTable carTable;
+    private JTable listadoTable;
     private JScrollPane scrollPane;
 
+    private JPanel formPanel;
+
+    JTextField _matricula;
+    JTextField _marca;
+    JTextField _modelo;
+    JTextField _anio;
+    JTextField _precio;
+    JCheckBox _vendido;
+
+    private CocheService service;
+
     public ConcesionarioViewMenu() {
+        service = new CocheServiceImpl();
         setTitle("Listado de Coches");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -62,10 +76,53 @@ public class ConcesionarioViewMenu extends JFrame {
         setJMenuBar(menuBar);
 
         // Crear tabla
-        carTable = new JTable();
-        scrollPane = new JScrollPane(carTable);
+        listadoTable = new JTable();
+        scrollPane = new JScrollPane(listadoTable);
+
+
+        listadoTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedRow = listadoTable.getSelectedRow();
+                if (selectedRow >= 0) {
+                    showCarForm(selectedRow);
+                }
+            }
+        });
+
+
+        // Crear formulario
+        formPanel = new JPanel(new GridLayout(3, 2));
+
+        formPanel.setBorder(BorderFactory.createTitledBorder("Detalles del Coche"));
+        formPanel.add(new JLabel("Matricula:"));
+        _matricula = new JTextField();
+        formPanel.add(_matricula);
+
+        formPanel.add(new JLabel("Marca:"));
+        _marca = new JTextField();
+        formPanel.add(_marca);
+
+        formPanel.add(new JLabel("Modelo:"));
+        _modelo = new JTextField();
+        formPanel.add(_modelo);
+
+        formPanel.add(new JLabel("Año:"));
+        _anio = new JTextField();
+        formPanel.add(_anio);
+
+        formPanel.add(new JLabel("Precio:"));
+        _precio = new JTextField();
+        formPanel.add(_precio);
+
+        formPanel.add(new JLabel("Vendido:"));
+        _vendido = new JCheckBox();
+        formPanel.add(_vendido);
+
 
         getContentPane().add(scrollPane, BorderLayout.CENTER);
+        getContentPane().add(formPanel, BorderLayout.SOUTH);
+        formPanel.setVisible(false);
     }
 
     private void showCars() {
@@ -79,7 +136,7 @@ public class ConcesionarioViewMenu extends JFrame {
         model.addColumn("Precio");
         model.addColumn("Vendido");
 
-        CocheService service = new CocheServiceImpl();
+        service = new CocheServiceImpl();
 
         List<Coche> coches = service.getList();
 
@@ -94,7 +151,10 @@ public class ConcesionarioViewMenu extends JFrame {
             });
         }
 
-        carTable.setModel(model);
+        listadoTable.setModel(model);
+
+        formPanel.setVisible(true);
+
     }
 
     private void showClientes() {
@@ -127,7 +187,23 @@ public class ConcesionarioViewMenu extends JFrame {
             });
         }
 
-        carTable.setModel(model);
+        listadoTable.setModel(model);
+    }
+
+
+    private void showCarForm(int rowIndex) {
+        DefaultTableModel model = (DefaultTableModel) listadoTable.getModel();
+        String matricula = (String) model.getValueAt(rowIndex, 0);
+
+        Coche coche = service.getById(matricula);
+
+        _matricula.setText(coche.getMatricula());
+        _marca.setText(coche.getMarca());
+        _modelo.setText(coche.getModelo());
+        _precio.setText(String.valueOf(coche.getPrecio()));
+        _anio.setText(String.valueOf(coche.getAnio()));
+        _vendido.setSelected(coche.isVendido());
+
     }
 
     public static void main(String[] args) {
