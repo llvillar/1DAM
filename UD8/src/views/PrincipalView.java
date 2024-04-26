@@ -29,7 +29,6 @@ public class PrincipalView extends JFrame {
                 PrincipalView.super.repaint();
             }
         });
-        JMenuItem itemColorVerde = new JMenuItem("Verde");
         itemClientes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

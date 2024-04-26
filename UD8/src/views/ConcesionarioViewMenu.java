@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
 
 public class ConcesionarioViewMenu extends JFrame {
@@ -28,6 +29,13 @@ public class ConcesionarioViewMenu extends JFrame {
     JTextField _anio;
     JTextField _precio;
     JCheckBox _vendido;
+
+    JButton addButton;
+    JButton updateButton;
+
+    JButton deleteButton;
+
+    JButton clearButton;
 
     private CocheService service;
 
@@ -92,7 +100,7 @@ public class ConcesionarioViewMenu extends JFrame {
 
 
         // Crear formulario
-        formPanel = new JPanel(new GridLayout(3, 2));
+        formPanel = new JPanel(new GridLayout(5, 2));
 
         formPanel.setBorder(BorderFactory.createTitledBorder("Detalles del Coche"));
         formPanel.add(new JLabel("Matricula:"));
@@ -120,6 +128,43 @@ public class ConcesionarioViewMenu extends JFrame {
         formPanel.add(_vendido);
 
 
+        addButton = new JButton("Nuevo");
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addCar();
+            }
+        });
+        formPanel.add(addButton);
+
+        updateButton = new JButton("Actualizar");
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateCar();
+            }
+        });
+        formPanel.add(updateButton);
+
+        deleteButton = new JButton("Eliminar");
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteCar();
+            }
+        });
+        formPanel.add(deleteButton);
+
+        clearButton = new JButton("Limpiar");
+
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearForm();
+            }
+        });
+        formPanel.add(clearButton);
+
         getContentPane().add(scrollPane, BorderLayout.CENTER);
         getContentPane().add(formPanel, BorderLayout.SOUTH);
         formPanel.setVisible(false);
@@ -135,8 +180,6 @@ public class ConcesionarioViewMenu extends JFrame {
         model.addColumn("Año");
         model.addColumn("Precio");
         model.addColumn("Vendido");
-
-        service = new CocheServiceImpl();
 
         List<Coche> coches = service.getList();
 
@@ -204,6 +247,89 @@ public class ConcesionarioViewMenu extends JFrame {
         _anio.setText(String.valueOf(coche.getAnio()));
         _vendido.setSelected(coche.isVendido());
 
+    }
+
+    private void addCar() {
+
+        String matricula = _matricula.getText();
+        String marca = _marca.getText();
+        String modelo = _modelo.getText();
+        String precio = _precio.getText();
+        String anio = _anio.getText();
+        boolean vendido = _vendido.isSelected();
+
+        Coche coche = new Coche();
+
+        coche.setMatricula(matricula);
+        coche.setMarca(marca);
+        coche.setModelo(modelo);
+        coche.setPrecio(Double.valueOf(precio));
+        coche.setAnio(new Date());
+        coche.setVendido(vendido);
+
+        DefaultTableModel model = (DefaultTableModel) listadoTable.getModel();
+
+        service.save(coche);
+
+        model.addRow(new Object[]{
+                coche.getMatricula(),
+                coche.getMarca(),
+                coche.getModelo(),
+                coche.getAnio(),
+                coche.getPrecio(),
+                coche.isVendido()
+        });
+
+        clearForm();
+    }
+
+
+    private void updateCar() {
+
+        String matricula = _matricula.getText();
+        String marca = _marca.getText();
+        String modelo = _modelo.getText();
+        String precio = _precio.getText();
+        String anio = _anio.getText();
+        boolean vendido = _vendido.isSelected();
+
+        Coche coche = new Coche();
+
+        coche.setMatricula(matricula);
+        coche.setMarca(marca);
+        coche.setModelo(modelo);
+        coche.setPrecio(Double.valueOf(precio));
+        coche.setAnio(new Date());
+        coche.setVendido(vendido);
+
+
+        service.update(coche);
+
+        showCars();
+
+    }
+
+
+    private void deleteCar() {
+        String matricula = _matricula.getText();
+
+        Coche coche = new Coche();
+
+        coche.setMatricula(matricula);
+
+        service.delete(coche);
+
+        showCars();
+
+    }
+
+    private void clearForm() {
+        _matricula.setText("");
+        _marca.setText("");
+        _modelo.setText("");
+        _precio.setText("");
+        _anio.setText("");
+        _vendido.setSelected(false);
     }
 
     public static void main(String[] args) {
