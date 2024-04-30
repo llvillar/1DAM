@@ -11,9 +11,6 @@ public class PrincipalView extends JFrame {
         setSize(640, 480);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        JPanel pnlFondo = new JPanel();
-        add(pnlFondo);
-
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
         JMenuItem itemCoches = new JMenuItem("Coches");
@@ -21,24 +18,18 @@ public class PrincipalView extends JFrame {
         itemCoches.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pnlFondo.removeAll();
-                pnlFondo.repaint();
                 CocheView cocheView = new CocheView();
-                pnlFondo.add(cocheView);
-                pnlFondo.repaint();
-                PrincipalView.super.repaint();
+                add(cocheView);
+                cocheView.setVisible(true);
+                repaint();
             }
         });
+
         itemClientes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pnlFondo.removeAll();
-                pnlFondo.repaint();
-                ClienteView clienteView = new ClienteView();
-                pnlFondo.add(clienteView);
-                pnlFondo.repaint();
-                PrincipalView.super.repaint();
-
+//                ClienteView clienteView = new ClienteView();
+ //               add(clienteView);
             }
         });
 
@@ -53,10 +44,8 @@ public class PrincipalView extends JFrame {
         menu.add(itemClientes);
         menu.addSeparator();
         menu.add(itemSalir);
-
         menuBar.add(menu);
         setJMenuBar(menuBar);
-
         setVisible(true);
     }
 }
