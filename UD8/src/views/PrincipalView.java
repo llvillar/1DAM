@@ -18,18 +18,26 @@ public class PrincipalView extends JFrame {
         itemCoches.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (getContentPane().getComponents().length > 0){
+                    getContentPane().remove(0);
+                }
                 CocheView cocheView = new CocheView();
-                add(cocheView);
-                cocheView.setVisible(true);
-                repaint();
+                add(cocheView, BorderLayout.CENTER);
+                cocheView.revalidate();
+                //cocheView.repaint();
             }
         });
 
         itemClientes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                ClienteView clienteView = new ClienteView();
- //               add(clienteView);
+                if (getContentPane().getComponents().length > 0){
+                    getContentPane().remove(0);
+                }
+                ClienteView clienteView = new ClienteView();
+                add(clienteView, BorderLayout.CENTER);
+                clienteView.revalidate();
+                //clienteView.repaint();
             }
         });
 
