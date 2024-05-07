@@ -12,4 +12,8 @@ public class DAOFactory {
         return new ClienteDaoImpl(DataSource.getConnection());
     }
 
+    public static ProductoDao createProductoDao(){
+        return new ProductoDaoImpl(DataSource.getConnection());
+    }
+
 }
